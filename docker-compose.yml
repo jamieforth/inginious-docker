@@ -1,0 +1,41 @@
+# TODO: Add SMTP service
+
+version: '3.3'
+
+services:
+  db:
+    image: mongo:latest
+    volumes:
+      - db_data:/data/db
+    networks:
+      - ingi_net
+
+  inginious:
+    image: inginious
+    command: ["inginious-webapp", "--host", "0.0.0.0"]
+    ports:
+      - "8080:8080"             # host:container
+    volumes:
+      # bind mount backup on local file system to preserve data
+      # (TODO: use a docker volume instead)
+      - type: bind
+        source: ./backup
+        target: /app/backup
+      # make the host dockerd accessible
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      # for sibling containers to communicate
+      - type: bind
+        source: /tmp
+        target: /tmp
+    depends_on:
+      - db
+    networks:
+      - ingi_net
+
+volumes:
+  db_data:
+
+networks:
+  ingi_net:

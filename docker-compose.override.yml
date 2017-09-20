@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  inginious:
+    volumes:
+      # live tweaking of the code
+      - type: bind
+        source: ./src
+        target: /app/src
+      # live tweaking of the course files
+      - type: bind
+        source: ./course-files
+        target: /app/course-files
+      # live tweaking of the config file
+      - type: bind
+        source: ./configuration.yaml
+        target: /app/configuration.yaml

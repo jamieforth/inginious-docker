@@ -1,0 +1,27 @@
+log_level: INFO
+
+backend: local
+local-config:
+  tmp_dir: /tmp
+
+backup_directory: ./backup
+
+mongo_opt:
+  database: INGInious
+  host: mongodb://db
+
+superadmins:
+- superadmin
+
+tasks_directory: ./course-files
+
+use_minified_js: true
+maintenance: false
+
+# smtp:
+#   sendername: 'INGInious <inginious@doc.gold.ac.uk>'
+#   host: 'smtp.office365.com'
+#   port: 587
+#   username: ''
+#   password: ''
+#   starttls: True
