@@ -25,3 +25,13 @@ maintenance: false
 #   username: ''
 #   password: ''
 #   starttls: True
+
+plugins:
+- plugin_module: inginious.frontend.plugins.auth.ldap_auth
+  host: "campus.goldsmiths.ac.uk"
+  encryption: "none" #can be ssl, tls or none
+  base_dn: "ou=goldsmiths_users,dc=campus,dc=goldsmiths,dc=ac,dc=uk"
+  request: "sAMAccountName={}"
+  prefix: ""
+  name: "INGI Login"
+  require_cert: false
