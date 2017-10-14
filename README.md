@@ -27,3 +27,23 @@ docker-compose up -d
 docker ps                       # find the name of the container
 docker logs -f inginious_inginious_1
 ```
+
+## Updating
+
+./src/inginious/base-containers/base
+
+docker build -t ingi/inginious-c-base .
+
+## Running tests
+
+```bash
+docker exec -it inginious_inginious_1 bash
+inginious-test-task <courseid> <taskid>
+```
+
+## Formatting feedback
+```bash
+echo "$output" | rst-code --escape --language python | feedback-msg -a
+echo "$output" | rst-indent --indent-char "    " | feedback-msg -a
+rst-image result.jpg | feedback -a # path relative to grading container
+```
