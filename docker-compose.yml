@@ -12,6 +12,10 @@ services:
 
   inginious:
     image: inginious
+    build:
+      context: ./
+      dockerfile: dockerfile
+    image: inginious
     command: ["inginious-webapp", "--host", "0.0.0.0"]
     ports:
       - "8080:8080"             # host:container
