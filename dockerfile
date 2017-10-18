@@ -22,8 +22,8 @@ WORKDIR /app
 
 # Install inginious in edit mode so that we can bind mount /app/src
 # for development
-RUN mkdir -p /app/src/inginious
-RUN git clone https://github.com/UCL-INGI/INGInious.git /app/src/inginious
+RUN mkdir -p /app/src
+COPY ./src/inginious /app/src/inginious
 
 RUN pip install --no-cache-dir --upgrade -e /app/src/inginious[cgi,ldap]
 
