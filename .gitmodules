@@ -1,0 +1,3 @@
+[submodule "src/inginious"]
+	path = src/inginious
+	url = https://github.com/UCL-INGI/INGInious.git
