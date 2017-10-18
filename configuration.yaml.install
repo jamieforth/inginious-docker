@@ -1,0 +1,38 @@
+log_level: INFO
+
+backend: local
+local-config:
+  tmp_dir: /tmp
+
+backup_directory: ./backup
+
+mongo_opt:
+  database: INGInious
+  host: mongodb://db
+
+superadmins:
+- superadmin
+
+tasks_directory: ./course-files
+
+use_minified_js: true
+maintenance: false
+
+# smtp:
+#   sendername: 'INGInious <inginious@example.com>'
+#   host: 'smtp.example.com'
+#   port: 587
+#   username: ''
+#   password: ''
+#   starttls: True
+
+# plugins:
+# - plugin_module: inginious.frontend.plugins.auth.ldap_auth
+#   host: ""
+#   encryption: "ssl" #can be ssl, tls or none
+#   base_dn: ""
+#   request: "()"
+#   prefix: ""
+#   name: "INGI Login"
+#   id: "ldap"
+#   require_cert: true
