@@ -1,5 +1,11 @@
 # Installation
 
+## Create a configuration.yaml
+
+```bash
+cp ./configuration.yaml.install ./configuration.yaml
+```
+
 ## Initialise Inginious submodule
 
 ```bash
