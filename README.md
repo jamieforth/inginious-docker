@@ -1,47 +1,83 @@
-# Installation and running
+# Installation
 
-First build the image.
+## Initialise Inginious submodule
+
+```bash
+git submodule update --init src/inginious/
+```
+
+## Build custom Inginious Docker images
+
+This is only necessary if you want to build custom images from the
+bleeding-edge code-base.
+
+Build the inginious-c-base image.
+
+```bash
+cd src/inginious/base-containers/base &&
+    docker build -t ingi/inginious-c-base .
+```
+
+Build your custom grading container images based on
+ingi/inginious-c-base. For example, create a `dockerfile` in your
+course directory containing the custom configuration and refer to this
+image in your task.yaml files.
+
+```bash
+FROM  ingi/inginious-c-base
+LABEL org.inginious.grading.name="my-python3"
+
+RUN python3 -m pip install …
+```
+
+## Build the Inginious image
 
 ```bash
 docker build -t inginious .
 ```
 
-## production mode
+# Running
+
+## Production mode
 ```bash
 docker-compose -f ./docker-compose.yml up -d
 ```
 
-## dev mode
+## Developer mode
 
 Creates bind mounts for local src and course-file directories, useful
-for development. For this to work you need a local copy of the
-inginious source code.
+for development. For this to work you need to manually create the
+INGInious.egg.info directory in the local copy of the Inginious source
+code (checked out as a submodule of this repository).
 
 ```bash
-git clone https://github.com/UCL-INGI/INGInious.git ./src/inginious
+cd ./src/inginious &&
+    python setup.py egg_info
+```
+
+Then just run docker-compose as usual from the root of the
+repository. The docker-compose.override.yml files will set up the bind
+mounts.
+
+```bash
 docker-compose up -d
 ```
 
-## logs
+# Accessing logs
+
 ```bash
 docker ps                       # find the name of the container
 docker logs -f inginious_inginious_1
 ```
 
-## Updating
-
-./src/inginious/base-containers/base
-
-docker build -t ingi/inginious-c-base .
-
-## Running tests
+# Running tests
 
 ```bash
 docker exec -it inginious_inginious_1 bash
 inginious-test-task <courseid> <taskid>
 ```
 
-## Formatting feedback
+# Formatting feedback
 ```bash
 echo "$output" | rst-code --escape --language python | feedback-msg -a
 echo "$output" | rst-indent --indent-char "    " | feedback-msg -a
