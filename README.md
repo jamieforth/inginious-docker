@@ -6,16 +6,21 @@
 cp ./configuration.yaml.install ./configuration.yaml
 ```
 
-## Initialise Inginious submodule
+## Initialise INGInious submodule
 
 ```bash
 git submodule update --init src/inginious/
 ```
 
-## Build custom Inginious Docker images
+## Building custom INGInious Docker images
 
-This is only necessary if you want to build custom images from the
-bleeding-edge code-base.
+This is only necessary if you want to build custom images for your
+course and you want to be certain that the base image is compatible
+with the version of INGInious you are running.
+
+In many cases you can skip this and Docker will just pull a pre-built
+image from
+[here](https://hub.docker.com/r/ingi/inginious-c-base/).
 
 Build the inginious-c-base image.
 
@@ -49,6 +54,8 @@ docker build -t inginious .
 docker-compose -f ./docker-compose.yml up -d
 ```
 
+Then in a browser visit `http://localhost:8080/`.
+
 ## Developer mode
 
 Creates bind mounts for local src and course-file directories, useful
@@ -58,7 +65,7 @@ code (checked out as a submodule of this repository).
 
 ```bash
 cd ./src/inginious &&
-    python setup.py egg_info
+    python3 setup.py egg_info
 ```
 
 Then just run docker-compose as usual from the root of the
