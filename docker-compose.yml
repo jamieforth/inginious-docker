@@ -20,19 +20,13 @@ services:
     ports:
       - "8080:8080"             # host:container
     volumes:
-      # bind mount backup on local file system to preserve data
-      # (TODO: use a docker volume instead)
-      - type: bind
+      - tmp:/tmp/inginious      # sibling container communication
+      - type: bind              # use local file system for backup
         source: ./backup
         target: /app/backup
-      # make the host dockerd accessible
-      - type: bind
+      - type: bind              # make the host dockerd accessible
         source: /var/run/docker.sock
         target: /var/run/docker.sock
-      # for sibling containers to communicate
-      - type: bind
-        source: /tmp
-        target: /tmp
     depends_on:
       - db
     networks:
@@ -40,6 +34,7 @@ services:
 
 volumes:
   db_data:
+  tmp:
 
 networks:
   ingi_net:

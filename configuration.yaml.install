@@ -2,7 +2,7 @@ log_level: INFO
 
 backend: local
 local-config:
-  tmp_dir: /tmp
+  tmp_dir: /tmp/inginious
 
 backup_directory: ./backup
 
